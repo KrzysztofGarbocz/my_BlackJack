@@ -27,3 +27,4 @@ def test_wrong_name():
 def test_print_card():
     card = Card(name='A', color='Club')
     print(card)
+

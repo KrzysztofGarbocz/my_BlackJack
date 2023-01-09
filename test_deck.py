@@ -24,3 +24,18 @@ def test_print_deck():
 def test_len_single_color():
     """Test len of single color"""
     assert len(Card.Possible_name) == 13
+
+
+def test_shuffle():
+    """Test shuffle"""
+    deck = Deck()
+    assert deck.deck != deck.shuffle()
+
+
+def test_take_card():
+    """Test take card"""
+    deck = Deck()
+    len1 = len(deck.deck)
+    deck.take_card()
+    len2 = len(deck.deck)
+    assert len1 == len2 + 1
