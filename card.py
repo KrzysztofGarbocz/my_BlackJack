@@ -27,3 +27,6 @@ class Card:
             self.color = color
         else:
             raise ColorException('Selected wrong color')
+
+    def __repr__(self):
+        return f'{self.color}-{self.name}'

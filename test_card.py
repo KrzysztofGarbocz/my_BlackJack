@@ -1,6 +1,5 @@
 """Testing card module"""
 import pytest
-
 from card import Card, NameException, ColorException
 
 
@@ -23,3 +22,8 @@ def test_wrong_name():
     with pytest.raises(NameException) as msg:
         Card('Wrong', "Club")
         assert msg == 'Selected wrong name'
+
+
+def test_print_card():
+    card = Card(name='A', color='Club')
+    print(card)
