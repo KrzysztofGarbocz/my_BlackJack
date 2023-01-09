@@ -1,5 +1,5 @@
 """Player class"""
-from deck import Deck
+from deck import Card
 
 
 class WinException(Exception):
@@ -10,6 +10,10 @@ class LostException(Exception):
     """Lost Exception"""
 
 
+class BlackJack(Exception):
+    """You have BlackJack"""
+
+
 class Player:
     def __init__(self, name: str):
         self.name = name
@@ -18,7 +22,41 @@ class Player:
         self.blackjack = False
         self.wait = False
 
-    deck = Deck()
+    def get_card(self, card: Card):
+        """Get card"""
+        self.hand.append(card)
 
-    def get_card(self, deck):
-        self.hand.append(deck.deck)
+    def count_card(self):
+        self.score = 0
+
+        if self.blackjack is False:
+            for card in self.hand:
+                if card.name != Card.Possible_name[:4]:
+                    self.score += int(card.name)
+                if card.name in Card.Possible_name[1:4]:
+                    self.score += 10
+                if card.name == Card.Possible_name[0]:
+                    how_many_as = len([card_as for card_as in self.hand if card_as == Card.Possible_name[0]])
+                    if how_many_as == 2 and len(self.hand) == 2:
+                        self.score = 21
+                        self.blackjack = True
+                        raise BlackJack('You have BlackJack !!!')
+                    if self.score >= 10 and self.blackjack is False:
+                        self.score += 1
+                    if self.score < 10 and self.blackjack is False:
+                        self.score += 11
+                if self.score > 21:
+                    raise LostException('You lost. You have more than 21')
+                print(f'Score: {self.score}')
+
+    def show_cards(self):
+        """Show cards"""
+        print(self.hand)
+
+    def present_me(self):
+        """Print msg"""
+        print(f'Player: {self.name}')
+
+    def welcome(self):
+        """Start game print"""
+        print(f'Welcome {self.name} in game.')
