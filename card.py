@@ -2,14 +2,18 @@
 
 
 class ColorException(Exception):
-    pass
+    """My color exception class"""
 
 
 class NameException(Exception):
-    pass
+    """My name exception class"""
 
 
 class Card:
+    """Class card
+    in name: str: from possible name list
+    in color : str: from possible color list
+    """
     Possible_color = ['Club', 'Diamond', 'Heart', 'Spades']
     Possible_name = ['A', 'Q', 'K', 'J'] + [str(x) for x in range(2, 11)]
 
