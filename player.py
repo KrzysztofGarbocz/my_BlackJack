@@ -21,6 +21,7 @@ class Player:
         self.score = 0
         self.blackjack = False
         self.wait = False
+        self.loose = False
 
     def get_card(self, card: Card):
         """Get card"""
@@ -59,6 +60,8 @@ class Player:
                         self.score += 11
 
                 if self.score > 21:
+                    self.loose = True
+                    self.wait = True
                     raise LostException('You lost. You have more than 21')
                 print(f'Score: {self.score}')
 
